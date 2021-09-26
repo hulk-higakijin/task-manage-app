@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
-  before_validation :set_nameless_name
-  validates :name, length: { maximum: 30 }, presence: true
+  validates :name, presence: true
   validate :validate_name_not_including_commma
+  belongs_to :user
 
   private
   
@@ -10,6 +10,6 @@ class Task < ApplicationRecord
     end
 
     def set_nameless_name
-      self.name = '名前なし', if name.blank?
+      self.name = '名前なし' if name.blank?
     end
 end
