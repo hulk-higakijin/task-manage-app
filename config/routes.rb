@@ -6,5 +6,14 @@ Rails.application.routes.draw do
     resources :users
   end
   root to: "tasks#index"
-  resources :tasks
+  resources :tasks do
+    collection do
+      get 'export'
+    end
+  end
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+
+  match '/login', to: 'sessions#create', via: [:post, :patch, :put]
 end
